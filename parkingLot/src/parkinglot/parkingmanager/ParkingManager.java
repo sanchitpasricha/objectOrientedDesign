@@ -15,6 +15,17 @@ public class ParkingManager {
    }
 
    public ParkingSpot findSpotForVehicle(Vehicle vehicle){
-     
+      VehicleSize vehicleSize = vehicle.getSize();
+     for(VehicleSize size : VehicleSize.values()){
+         if(size.ordinal() >= vehicleSize.ordinal()){
+            List<ParkingSpot> spots = availableSpots.get(size);
+            for(ParkingSpot spot : spots){
+               if(spot.isAvailable()){
+                  return spot;
+               }
+            }
+         }
+     }
+     return null;
    }
 }
